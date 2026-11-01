@@ -19,7 +19,8 @@
 <meta name="twitter:description" content="瀬戸大作が作った24のアプリを、池に浮かべて眺めるポートフォリオ。">
 <meta name="twitter:image" content="https://dai-hydrangea.github.io/portfolio/ogp.png">
 <style>
-  :root{--paper:#eef3f4;--ink:#1f2b33;--dim:#6f8591;--indigo:#2f6f8f;--line:rgba(60,100,120,.2);}
+  :root{--paper:#eef3f4;--ink:#1f2b33;--dim:#6f8591;--indigo:#2f6f8f;--line:rgba(60,100,120,.2);--ic:110px;}
+  @media(max-width:640px){:root{--ic:76px;}}
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
   body{background:var(--paper);color:var(--ink);overflow-x:hidden;
     font-family:"Hiragino Mincho ProN","Hiragino Sans","Noto Serif JP",serif;-webkit-font-smoothing:antialiased;}
@@ -80,20 +81,20 @@
 
   .fish{position:absolute;z-index:2;cursor:pointer;will-change:transform;
     display:flex;flex-direction:column;align-items:center;}
-  .fish .ic{width:110px;height:110px;border-radius:22%;overflow:hidden;background:#fff;
+  .fish .ic{width:var(--ic);height:var(--ic);border-radius:22%;overflow:hidden;background:#fff;
     box-shadow:0 8px 16px rgba(20,50,70,.28),0 0 0 1px rgba(255,255,255,.5);
     transition:box-shadow .3s,transform .3s;}
   .fish .ic img{width:100%;height:100%;object-fit:cover;display:block;}
-  .fish .nm{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:8px;
-    width:124px;text-align:center;line-height:1.25;font-size:11.5px;color:var(--ink);opacity:.82;
+  .fish .nm{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:7px;
+    width:calc(var(--ic) + 18px);text-align:center;line-height:1.25;font-size:11px;color:var(--ink);opacity:.82;
     white-space:normal;word-break:break-word;pointer-events:none;transition:opacity .25s;z-index:5;}
   .fish:hover{z-index:9;}
   .fish:hover .nm{opacity:1;font-weight:700;}
   .fish:hover .ic{box-shadow:0 14px 26px rgba(20,50,70,.4),0 0 0 2px rgba(255,255,255,.9);transform:scale(1.06);}
   /* 反射 */
-  .fish .reflect{width:110px;height:64px;margin-top:6px;border-radius:22%;overflow:hidden;opacity:.14;
+  .fish .reflect{width:var(--ic);height:calc(var(--ic)*0.58);margin-top:6px;border-radius:22%;overflow:hidden;opacity:.14;
     transform:scaleY(-1);filter:blur(1px);}
-  .fish .reflect img{width:110px;height:110px;object-fit:cover;}
+  .fish .reflect img{width:var(--ic);height:var(--ic);object-fit:cover;}
 
   /* 吊り上げシート */
   .sheet{position:fixed;left:0;right:0;bottom:0;z-index:40;transform:translateY(102%);
@@ -163,7 +164,11 @@ const pondsEl=document.getElementById('ponds');
 const fishes=[]; // {el, baseX, baseY, phase, amp, rotp}
 let justDragged=false, dragMoved=false;  // ドラッグ直後のクリック誤爆を防ぐ
 
-function laneHeight(){ return Math.max(206, Math.min(280, innerHeight*0.34)); }
+function laneHeight(){
+  return innerWidth<640
+    ? Math.max(160, Math.min(200, innerHeight*0.24))     // スマホ：低めに詰める
+    : Math.max(206, Math.min(280, innerHeight*0.34));
+}
 
 DATA.forEach((g,gi)=>{
   const t=TINTS[gi%TINTS.length];
@@ -216,7 +221,8 @@ function layout(){
     const track=lane.querySelector('.track');
     const items=g.apps.map((a,ai)=>fishes.find(f=>f.gi===gi&&f.ai===ai));
     // 各ジャンル＝横1行。はみ出す分は track を広げて横スクロールで見られるように。
-    const padL=W<640?112:146, icon=110, gap=32, rightPad=24;
+    const icon=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--ic'))||110;
+    const padL=W<640?96:146, gap=W<640?22:32, rightPad=24;
     let stepX=icon+gap;                           // 最小間隔
     const avail=W-padL-icon-rightPad;             // 最後のアイコンが画面内に収まる範囲
     if(items.length>1) stepX=Math.max(icon+gap, Math.min(stepX+40, avail/(items.length-1)));
