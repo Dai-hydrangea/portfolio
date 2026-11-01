@@ -1,4 +1,4 @@
-// 自動生成: Apple lookup API (開発者ID 1889853807)
+// 自動生成: build_data.py (stories.md + raw.json より)。手で編集しない。
 window.DATA = [
  {
   "verb": "音楽",
@@ -21,7 +21,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/e6/b5/8c/e6b58c03-fb91-3af8-95df-e73e4b52ccf9/07_skin_sheet.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/93/b2/a3/93b2a3ff-dd7b-99fb-17a7-b303671f26c0/08_pro.png/600x0w.jpg"
     ],
-    "story": "トランペットを吹いていると、自分の音がいま速いのか遅いのか、ほんとうは分からない瞬間がある。だから、1日の練習に必要なものを全部ひとつの箱に入れた。チューナーも、メトロノームも、ハーモニーも、基礎練も。"
+    "story": "自分のトランペット練習で欲しい機能をモリモリに詰め込んだツール。正しい音程を聞きながら合わせるチューナーや純正律と平均律を切り替えられるハーモニー練習、特殊なリズムがわかるメトロノーム、正しい音程を聞きながら吹けるスケールやリップスラーができる基礎練モードも。"
    },
    {
     "name": "合奏チューナー - リアルタイム和音・音程判定",
@@ -35,7 +35,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/b5/55/8e/b5558e54-7f9a-ba84-471b-c39d59868c3a/JA_iPhone65_02_seventh.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/99/7e/a4/997ea403-13ca-2e01-d037-4028be2a8411/JA_iPhone65_03_settings.png/600x0w.jpg"
     ],
-    "story": "一人でチューナーに合わせても、合奏は合わない。合奏中、自分の音が和音に対して高いのか低いのか分からなくなる。複数の音を同時に聴いて、鳴っているコードを判定して、純正律の青い線で“ここ”を教える道具にした。"
+    "story": "合奏中、自分の音が和音に対して高いのか低いのかを知りたくて作ったツール。一つのチューナーで複数の音を同時に聴き、鳴っているコードを判定できる道具。"
    },
    {
     "name": "FingerLinga",
@@ -54,7 +54,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/bb/e7/63/bbe763f2-b8d7-4dcc-f46e-fba8ffb16d5e/IMG_6507.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/7b/73/63/7b7363fd-6ecc-284d-bf9a-c2feac74b0e0/IMG_6508.png/600x0w.jpg"
     ],
-    "story": "楽器を出せない場所でも、運指だけは鍛えられる。電車の中、寝る前。マイクも楽器もいらない、指だけの管楽器練習。譜面が右から左へ流れていく。"
+    "story": "楽器を出せない場所でも、運指を練習できるツール。左手でも運指を回すと何故か右手の指もよく回るようになる。指が回らないと感じる人のサポートツール。"
    },
    {
     "name": "ScoreLibrary",
@@ -73,7 +73,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/b3/b4/1b/b3b41b16-3525-5ab6-8824-41a3c5b5954d/07_iphone.jpg/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/4f/66/0c/4f660cfd-796f-d1cb-fb72-f9df58ce245b/08_iphone.jpg/600x0w.jpg"
     ],
-    "story": "練習現場で使う楽譜は、書き込みがぜんぶ財産だ。その日々の書き込みを時間軸で記録して、あとで振り返れるようにした。吹奏楽もオケも室内楽も、日本語ネイティブで。"
+    "story": "自分で使った楽譜を本番ごとにまとめられる譜面ツール。その日々の書き込みも時間軸で記録して、あとで振り返れるタイムマシーン機能も。プロの声も聞いて、たくさん本番がある人も本番ごとの情報を楽譜とともにまとめられる。"
    },
    {
     "name": "瞬間演奏切り出し - ToneCut",
@@ -90,7 +90,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/6a/61/f0/6a61f0ba-130e-9140-b6dd-c38b4416d8fa/05.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/ff/54/b7/ff54b7c1-547a-fe10-16fe-4c89055566b5/06.png/600x0w.jpg"
     ],
-    "story": "合奏を録ると、会話や物音まで混ざる。演奏だけを、録ったまま切り出す“動画の包丁”にした。ついでに、練習を記録する係も兼ねてもらっている。"
+    "story": "自分が受けているトランペットのレッスン記録を残すために作ったツール。合奏やレッスンなど、長時間の練習から演奏だけを瞬間で切り出せる。議事録も同時に取れるので、日々の練習から演奏部分と指示されたことを同時に記録できる。"
    }
   ]
  },
@@ -112,7 +112,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/ee/13/dd/ee13ddfd-7d34-0713-f6ed-6d5b7201d637/ja_04_gameover_IMG_7533_iphone.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/fb/3b/0c/fb3b0c66-05e5-4b67-4ca6-dc39fd2519a5/ja_05_pro_IMG_7534_iphone.png/600x0w.jpg"
     ],
-    "story": "会議で詰められた帰り道に、これ居合い斬りだな、と思った。職場あるあるを、リズムで斬り返すゲームにした。台詞は全部、実際に言われたやつ。だから刺さるし、笑える。"
+    "story": "PMの業務って次々課題が襲ってくるよなと思って作った。職場あるあるをリズムで斬り返すゲームにした。味方だと思っていた上司も背中から打ってくる。"
    },
    {
     "name": "がんばれトレーダーくん",
@@ -128,7 +128,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/71/cd/f6/71cdf6a2-cdbe-efec-4c0b-d15b85da3813/ja_04_settings_IMG_7560_iphone.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/c1/ec/0a/c1ec0af9-4483-24c8-f2e9-cc50df39dc94/ja_05_pro_IMG_7561_iphone.png/600x0w.jpg"
     ],
-    "story": "損切りできない、ナンピンしたらまた下がる、「今度こそ」でまた追証。相場に振り回された日こそ笑い飛ばしたくて、PMくんの兄弟として作った。"
+    "story": "PMくんの兄弟として作った。日々変化する相場の荒波をゲームにしてみた。損切りできない、ナンピンしたらまた下がる、「今度こそ」でまた追証。相場に振り回される日々を切り倒す。"
    },
    {
     "name": "一寸勇者",
@@ -144,7 +144,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/74/71/47/747147c4-5f5c-c134-97c3-c713854ee7a6/JP_iPhone63_04_guide.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/47/a3/83/47a38394-83be-d414-3ce8-4d2ccff953cf/JP_iPhone63_05_pro.png/600x0w.jpg"
     ],
-    "story": "針ひとつを手にした、親指ほどの小さな勇者。送り出して、帰りを待つ。失敗しても失うのは時間だけ。寝て起きたら少し進んでいる、やさしい放置RPGにした。"
+    "story": "庭先を冒険するようなゲームを作ってみた。ステータスや装備の能力をシンプルにし、お供と冒険するやさしい放置系RPG。"
    },
    {
     "name": "QRダンジョン",
@@ -163,7 +163,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/b5/d9/12/b5d91246-0a3b-c0be-0380-4a0859de3829/08_pro.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/47/83/7c/47837c30-b8ed-c7c9-4a44-217fadabc8ff/02_boss_expedition.png/600x0w.jpg"
     ],
-    "story": "身の回りのバーコードが、ぜんぶ冒険の入口だったら面白い。スキャンすると決定論的に仲間や武具が生まれる。同じコードからは、何度でも同じ仲間が。完全オフライン。"
+    "story": "身の回りのバーコードが、全部武器や仲間になったら面白いなと思って作った。町中のバーコードをつい読み取りたくなる。忙しい時でも遊べるような放置系ゲームとした。完全オフライン。"
    }
   ]
  },
@@ -185,7 +185,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/5e/c6/25/5ec625df-985b-4133-59c6-67c8dcf52909/screenshot_05.jpg/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/05/11/7c/05117cba-ce17-363e-fdcf-0b2e50e9a635/screenshot_02.jpg/600x0w.jpg"
     ],
-    "story": "「気になる」を、身近な三人に聞ける。素直な少年、受けとめるおばあちゃん、もう一人。視点を変える、時間をずらす、手放す。お守りみたいなチャット。"
+    "story": "「気になる言葉」を、身近な三人に聞ける。素直な少年、知恵袋的なおばあちゃん、人生も波乗りにしてしまうサーファー。色々なことを視点を変えて捉えられるチャットツール。"
    },
    {
     "name": "A.L.I.S.",
@@ -203,7 +203,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/fa/cf/44/facf440b-98e4-c68e-f603-25a7d26b1494/03_iphone.jpg/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/10/5c/5a/105c5a6d-c49a-8c36-5847-77ef5e6c6fc5/06_iphone.jpg/600x0w.jpg"
     ],
-    "story": "答えをぶつけてくるAIに、少し疲れていた。だから、答えを出さず、問いを返し、あなたの世界から例え話で応える“共鳴管”としてのAIを作った。"
+    "story": "いつも答えを返してくるAIに、少し疲れてきた。だから、答えを出すのではなく、問いを返し、あなたの世界から例え話で応える“共鳴管”としてのAIを作った。"
    },
    {
     "name": "Attenai",
@@ -222,7 +222,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/76/e2/b2/76e2b23a-f61f-8d8b-7de7-da6084733971/06_settings_ja.jpg/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/98/aa/70/98aa7086-5baf-e527-6d1d-dcbe6f2ce84f/07_settings_en.jpg/600x0w.jpg"
     ],
-    "story": "日常の何気ない疑問を、哲学者に投げる。ソクラテスは問い返し、ニーチェは挑発する。答えをもらう場所じゃなく、問いを深める場所。"
+    "story": "日常のふとした疑問を、哲学者にぶつけられたら面白いなと思って作った。ソクラテスは問い返してくるし、ニーチェは挑発してくる。答えをもらうんじゃなくて、問いを深めていくチャットツール。"
    },
    {
     "name": "Kailua",
@@ -243,7 +243,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/1e/e3/b8/1ee3b82b-e38d-64fc-643a-af903a10aae8/07_IMG_6347.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/c4/ce/97/c4ce9710-5de8-e685-0a47-8cc5af16551f/IMG_6518_iPhone65.png/600x0w.jpg"
     ],
-    "story": "朝の海岸線に立つように、自分を観察する小さなアプリ。急がない、答えない、待つ。やわらかな対話で、自分の選択の癖をそっと映す。"
+    "story": "朝の海辺に立つみたいに、自分をゆっくり観察できるアプリを作りたかった。急かさない、答えを出さない、ただ待つ。やわらかい対話で、自分の選び方のクセがそっと見えてくる。"
    },
    {
     "name": "まほうの手紙",
@@ -260,7 +260,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/23/ff/cf/23ffcff8-18c4-7a51-3cb3-71ab9f238ffd/JA_iPhone65_04_settings.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/ca/95/d2/ca95d259-8eee-3f92-b8ea-11ab528945fe/JA_iPhone65_05_pro.png/600x0w.jpg"
     ],
-    "story": "魔法のインクで日記を書くと、折り鶴になって「まほうの国」へ飛んでいく。翌朝、住人からの返事がそっと届く。1日に1回だけ。答えを求めない、交換日記。"
+    "story": "魔法のインクで日記を書くと、折り鶴になって「まほうの国」へ飛んでいく。翌朝、住人からの返事がそっと届く。1日に1回だけ。答えを求めない、ファンタジー世界と交換日記。"
    },
    {
     "name": "LogicCoach",
@@ -276,7 +276,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/d5/2a/67/d52a67f7-9c56-186a-4c15-a61f38047edc/04_privacy.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/fd/bb/21/fdbb21bb-aacc-9c57-d90d-119ca4e71257/05_pro.png/600x0w.jpg"
     ],
-    "story": "文章が書けないのは、語彙力のせいじゃない。書き始める前に、頭の中が整理されていないからだ。答えを書くAIではなく、整理を手伝って、最後は自分に書かせるAIにした。"
+    "story": "文章が書けないのは、語彙力のせいじゃなくて、頭の中で理解しきれていないからだと思った。答えを書くAIではなく、論理的思考を手伝って、気がついたら整理された文になるサポートAIツール。"
    }
   ]
  },
@@ -298,7 +298,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/90/f2/c3/90f2c312-8365-cf0d-522c-2d2317d30f39/JP_iPhone63_04_widget.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/bd/6f/d9/bd6fd91c-77d3-1d1f-bd7c-e5fd9051400c/JP_iPhone63_05_pro.png/600x0w.jpg"
     ],
-    "story": "表は、ただの1枚の裏紙。殴り書きしていい。でも裏側では、書いたものが勝手にデータとして整理されていく。改行するだけ。考える前に書ける手触りが欲しかった。"
+    "story": "メモを書き始める前に忘れてしまうことがあるので、フォルダ分けとか無駄な作業は極力外したメモ帳。開いて書くだけのメモ。書いて、改行するだけでAIが勝手にカテゴリ分けしてくれる。"
    },
    {
     "name": "SAPIENTIA",
@@ -318,7 +318,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/be/61/23/be6123b2-2502-1346-7647-4fa538f3c956/06_iphone_6.5.jpg/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/69/af/ea/69afea5a-0764-e49c-204f-89bf91816c43/07_iphone_6.5.jpg/600x0w.jpg"
     ],
-    "story": "論文も辞典も専門書も、ふだんの読み物も。PDFを「引く・読む・聴く」ための道具。横断検索で探し、リーダーで読み、端末の中の声で聴く。研究の縦割りを越える。"
+    "story": "論文や辞典、専門書を、一気に検索したくて作ったツール。PDFを横断検索で引いて、リーダーで読んで、声で聴く。教科書や研究論文の縦割りをまたいで使える道具。"
    },
    {
     "name": "帯暦",
@@ -336,7 +336,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/55/d2/71/55d2716f-8c64-1a60-029f-a9b1dfe3a8a6/06_iphone_6.5.jpg/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/79/6d/e5/796de5c5-d314-5b7b-f7d3-d128b0c308ee/07_iphone_6.5.jpg/600x0w.jpg"
     ],
-    "story": "家族や自分の予定を、一枚の帯のように横並びで眺める。高機能で何でもできる必要はない。読み込んで、共有して、眺める。軽くて静かなカレンダー。"
+    "story": "家族や自分の予定を、一枚の帯みたいに横並びで眺めたくて作った。なんでもできる高機能カレンダーじゃない。読み込んで、共有して、眺めるだけ。軽くて静かな予定表。"
    },
    {
     "name": "単語読み上げ君",
@@ -353,7 +353,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/3a/6c/20/3a6c20b6-b4a0-4a98-b278-893807b09de8/05_iphone65_IMG_7252.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/4f/fb/ac/4ffbac30-7e4d-0379-29d2-900127824e8e/06_iphone65_IMG_7253.png/600x0w.jpg"
     ],
-    "story": "子どもが教科書の英単語でつまずく。横について発音してあげたいけど、いつもは無理だ。撮ってタップで発音と子ども向けの意味が返る、“親のかわりの指”にした。"
+    "story": "子どもが教科書の英単語でつまずくたび、横について発音してあげたいけど、いつもはできないので作った。プリントを撮ってタップするだけで発音と子ども向けの意味が返るようにしてみた。プリントが参考書になるツール。"
    }
   ]
  },
@@ -377,7 +377,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/37/da/b2/37dab2f7-06b8-5b5e-a759-f3b21db02c4b/IMG_6481.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/cc/e8/9a/cce89ae3-8af0-fc06-e070-6d8579f657a9/IMG_6475.png/600x0w.jpg"
     ],
-    "story": "あの可愛かった瞬間を、もっと撮っておけばよかった——作者自身の後悔から生まれた。お世話に追われてペットを撮れない人へ。猫をフレームに収める手伝いをする。"
+    "story": "あの可愛い瞬間、もっと撮っておけばよかった。自分や友人のそんな後悔から作った。お世話に追われてペットを撮れない人のために、猫をいい感じにフレームへ収める手伝いをする。"
    },
    {
     "name": "Rera",
@@ -393,7 +393,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/46/66/ae/4666aec5-1fcc-8329-585d-5ad7acadb5a7/04_iphone_6.5.jpg/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/6a/6c/72/6a6c72b8-35c1-b45d-eb2e-fba27ffeb57b/05_iphone_6.5.jpg/600x0w.jpg"
     ],
-    "story": "きれいな読書記録のためのアプリじゃない。線を引いた一文、思わず撮ったページ——読んだ本に“あなたの痕跡”を綴じる本棚。Rera はアイヌ語で「風」。"
+    "story": "きれいな読書記録を作るためのアプリじゃない。線を引いた一文や、思わず心に残った言葉をページをとるだけで残す。読んだ本と近づいた“自分の痕跡”を残す本棚。Rera はアイヌ語で「風」。"
    },
    {
     "name": "てのひラボ",
@@ -410,7 +410,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/ed/4b/92/ed4b9221-61f4-897d-bffb-2ae64ffc724a/IMG_6298.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/43/82/f9/4382f907-0868-9ba1-8f77-59be75ee062f/IMG_6299.png/600x0w.jpg"
     ],
-    "story": "身の回りの不思議に手を伸ばすと、数式の美しさに触れる。手のひらサイズの科学博物館。太陽系も銀河も、指で動かせる展示ホールにした。"
+    "story": "身の回りの不思議に手を伸ばしたら、数式の美しさに触れられる。そんな手のひらサイズの科学博物館を作った。太陽系も銀河も、指で動かせる展示にしてある。"
    },
    {
     "name": "World Prism",
@@ -428,7 +428,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/af/ef/21/afef2117-f105-0dbe-c402-b22cc68b0b35/IMG_5835.jpeg/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/69/57/8b/69578b7c-47b8-7df5-a203-b415f56cdf71/IMG_5837.jpeg/600x0w.jpg"
     ],
-    "story": "目の前のポテトチップス、道端のガードレールの模様、ふと気になった言葉。カメラを向けるか、一言入れるだけ。「ただそれだけ」で、世界を見る解像度が少し上がる。"
+    "story": "目の前のポテトチップスでも、道端のガードレールの模様でも、ふと気になった言葉でもいい。カメラを向けるか、一言入れるだけ。「ただそれだけ」で、世界の解像度が少し上がるアプリ。"
    },
    {
     "name": "Ruten",
@@ -443,7 +443,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/8b/90/f7/8b90f7ce-5ac7-499e-f1ef-75e3e54497ad/IMG_6149.png/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/ad/81/d0/ad81d033-5865-e3b7-e8c8-3ba4a5addc4b/IMG_6150.png/600x0w.jpg"
     ],
-    "story": "宇宙から眺める、小さな惑星の物語。球面のうえで6系統の生命が食物連鎖で暮らす。赤に寄れば強く、青に寄れば数多く大人しい。ただ、流転を眺める。"
+    "story": "宇宙から小さな惑星を眺めるようなアプリを作ってみた。球面の上で6系統の生命が食物連鎖で暮らしてる。赤に寄るほど強く、青に寄るほど数が多くて大人しい。ただ流転を眺める。"
    }
   ]
  }

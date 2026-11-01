@@ -3,7 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>D.Seto — つくったもの棚（池）</title>
+<title>D.Seto — つくったもの棚</title>
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta name="description" content="瀬戸大作（D.Seto）が作った24のアプリを、ジャンル別の池に浮かべて眺めるポートフォリオ。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="D.Seto — つくったもの棚">
+<meta property="og:description" content="瀬戸大作が作った24のアプリを、池に浮かべて眺めるポートフォリオ。">
+<meta property="og:url" content="https://dai-hydrangea.github.io/portfolio/">
+<meta property="og:image" content="https://dai-hydrangea.github.io/portfolio/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="D.Seto — つくったもの棚">
+<meta name="twitter:description" content="瀬戸大作が作った24のアプリを、池に浮かべて眺めるポートフォリオ。">
+<meta name="twitter:image" content="https://dai-hydrangea.github.io/portfolio/ogp.png">
 <style>
   :root{--paper:#eef3f4;--ink:#1f2b33;--dim:#6f8591;--indigo:#2f6f8f;--line:rgba(60,100,120,.2);}
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -81,7 +95,8 @@
   <header>
     <div class="name">D.Seto <small>つくったもの棚</small></div>
     <div class="links">
-      <a href="https://note.com/daisaku_seto" target="_blank" rel="noopener">note</a>
+      <a href="https://note.com/dai_hydrangea" target="_blank" rel="noopener">note</a>
+      <a href="https://twitter.com/Dai_hydrangea" target="_blank" rel="noopener">X</a>
       <a href="https://apps.apple.com/jp/developer/daisaku-seto/id1889853807" target="_blank" rel="noopener">App Store</a>
     </div>
   </header>
@@ -161,9 +176,9 @@ function openSheet(gi,ai){
   if(hookedEl)hookedEl.hooked=false;
   const f=fishes.find(x=>x.gi===gi&&x.ai===ai);
   f.hooked=true; hookedEl=f;
-  f.el.style.transition='transform .5s cubic-bezier(.2,.9,.25,1)';
-  f.el.style.transform=`translate(${f.baseX}px, ${-20}px) scale(1.25)`;
-  setTimeout(()=>{ if(f.el)f.el.style.transition=''; },520);
+  f.el.style.transition='transform .3s cubic-bezier(.2,.9,.3,1)';
+  f.el.style.transform=`translate(${f.baseX}px, ${f.baseY}px) scale(1.2)`;   // その場で拡大
+  setTimeout(()=>{ if(f.el)f.el.style.transition=''; },320);
 
   scontent.innerHTML=`
     <div class="stop">
