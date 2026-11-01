@@ -166,7 +166,7 @@ let justDragged=false, dragMoved=false;  // ドラッグ直後のクリック誤
 
 function laneHeight(){
   return innerWidth<640
-    ? Math.max(160, Math.min(200, innerHeight*0.24))     // スマホ：低めに詰める
+    ? Math.max(190, Math.min(230, innerHeight*0.27))     // スマホ：アイコン下に余白を少し
     : Math.max(206, Math.min(280, innerHeight*0.34));
 }
 
@@ -283,6 +283,25 @@ function closeSheet(){
 }
 scrim.onclick=closeSheet;
 addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet();});
+
+// シートを下スワイプで閉じる（上端まで来てから、下に引くと引っ込む）
+let shY=0, shDrag=false, shTop=false;
+sheet.addEventListener('touchstart',e=>{
+  shY=e.touches[0].clientY; shTop=sheet.scrollTop<=0; shDrag=false;
+  sheet.style.transition='none';
+},{passive:true});
+sheet.addEventListener('touchmove',e=>{
+  if(!shTop)return;                                   // コンテンツ内スクロール中はドラッグしない
+  const dy=e.touches[0].clientY-shY;
+  if(dy>0){ shDrag=true; sheet.style.transform=`translateY(${dy}px)`; }
+},{passive:true});
+sheet.addEventListener('touchend',e=>{
+  sheet.style.transition='';
+  const dy=e.changedTouches[0].clientY-shY;
+  sheet.style.transform='';                           // 戻すか閉じるかはクラスに委ねる
+  if(shDrag && dy>90) closeSheet();                   // 90px以上引いたら閉じる
+  shDrag=false;
+},{passive:true});
 addEventListener('resize',layout);
 
 layout(); requestAnimationFrame(tick);
