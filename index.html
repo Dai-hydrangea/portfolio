@@ -58,6 +58,16 @@
   .lane .llabel{position:absolute;left:26px;top:14px;z-index:3;pointer-events:none;}
   .lane .verb{font-size:17px;font-weight:700;color:rgb(var(--tint-ink));letter-spacing:.04em;}
   .lane .en{display:block;font-size:9px;color:var(--dim);letter-spacing:.2em;text-transform:uppercase;font-family:ui-monospace,Menlo,monospace;margin-top:2px;}
+  /* アイコンだけ横スクロールする層（水面とラベルは固定） */
+  .scroller{position:absolute;inset:0;z-index:2;overflow-x:auto;overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .scroller::-webkit-scrollbar{display:none;}
+  .track{position:relative;height:100%;}
+  /* 右端に「まだ続くよ」のうっすらフェード（スクロール可能なレーンだけ） */
+  .lane .edge{position:absolute;top:0;right:0;bottom:0;width:34px;z-index:4;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(20,50,70,.14));opacity:0;transition:opacity .3s;}
+  .lane.scrollable .edge{opacity:1;}
+  .lane.ended .edge{opacity:0;}
 
   .fish{position:absolute;z-index:2;cursor:pointer;will-change:transform;
     display:flex;flex-direction:column;align-items:center;}
@@ -127,7 +137,7 @@
   </section>
 
   <div id="ponds"></div>
-  <div class="hint">アイコンをタップすると、下から詳細がせり上がります</div>
+  <div class="hint">アイコンをタップで詳細。各行は横スワイプで、その続きが見られます</div>
 
   <div class="scrim" id="scrim"></div>
   <div class="sheet" id="sheet"><div class="handle"></div><div class="scontent" id="scontent"></div></div>
@@ -150,14 +160,20 @@ DATA.forEach((g,gi)=>{
   const lane=document.createElement('div');
   lane.className='lane'; lane.style.height=laneHeight()+'px';
   lane.style.setProperty('--tint',t.band); lane.style.setProperty('--tint-ink',t.ink);
-  lane.innerHTML=`<div class="water"></div><div class="llabel"><span class="verb">${g.verb}</span><span class="en">${g.en}</span></div>`;
+  lane.innerHTML=`<div class="water"></div><div class="llabel"><span class="verb">${g.verb}</span><span class="en">${g.en}</span></div><div class="scroller"><div class="track"></div></div><div class="edge"></div>`;
+  const track=lane.querySelector('.track');
+  const scroller=lane.querySelector('.scroller');
+  scroller.addEventListener('scroll',()=>{
+    const atEnd=scroller.scrollLeft+scroller.clientWidth>=scroller.scrollWidth-6;
+    lane.classList.toggle('ended',atEnd);
+  },{passive:true});
   g.apps.forEach((a,ai)=>{
     const f=document.createElement('div'); f.className='fish';
     f.innerHTML=`<div class="ic"><img loading="lazy" src="${a.icon}" alt="${a.name}"></div>
       <div class="nm">${a.name}</div>
       <div class="reflect"><img src="${a.icon}" alt=""></div>`;
     f.onclick=()=>openSheet(gi,ai);
-    lane.appendChild(f);
+    track.appendChild(f);
     fishes.push({el:f,gi,ai,phase:Math.random()*Math.PI*2,amp:3+Math.random()*4,rotp:Math.random()*Math.PI*2,speed:.6+Math.random()*.5});
   });
   pondsEl.appendChild(lane);
@@ -168,12 +184,16 @@ function layout(){
   lanes.forEach(l=>l.style.height=laneHeight()+'px');
   DATA.forEach((g,gi)=>{
     const lane=lanes[gi]; const W=lane.clientWidth, H=lane.clientHeight;
+    const track=lane.querySelector('.track');
     const items=g.apps.map((a,ai)=>fishes.find(f=>f.gi===gi&&f.ai===ai));
-    // 各ジャンル＝横1行。左から等間隔に並べる（重ならない間隔）
-    const padL=146, icon=110, gap=32;
+    // 各ジャンル＝横1行。はみ出す分は track を広げて横スクロールで見られるように。
+    const padL=W<640?112:146, icon=110, gap=32, rightPad=24;
     let stepX=icon+gap;                           // 最小間隔
-    const avail=W-padL-30;
-    if(items.length>1) stepX=Math.max(icon+gap, Math.min(stepX+40, avail/(items.length-1+0.001)));
+    const avail=W-padL-icon-rightPad;             // 最後のアイコンが画面内に収まる範囲
+    if(items.length>1) stepX=Math.max(icon+gap, Math.min(stepX+40, avail/(items.length-1)));
+    const trackW=padL+(items.length-1)*stepX+icon+rightPad;
+    track.style.width=Math.max(W,trackW)+'px';    // レーン幅より広ければ横スクロール発生
+    lane.classList.toggle('scrollable', trackW>W+4);
     items.forEach((f,ai)=>{
       f.baseX=padL+ai*stepX;
       f.baseY=H*0.48;                             // 全部おなじ高さ＝1行（上のタイトル用に少し下げる）
