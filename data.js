@@ -393,7 +393,7 @@ window.DATA = [
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/46/66/ae/4666aec5-1fcc-8329-585d-5ad7acadb5a7/04_iphone_6.5.jpg/600x0w.jpg",
      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/6a/6c/72/6a6c72b8-35c1-b45d-eb2e-fba27ffeb57b/05_iphone_6.5.jpg/600x0w.jpg"
     ],
-    "story": "きれいな読書記録を作るためのアプリじゃない。線を引いた一文や、思わず心に残った言葉をページをとるだけで残す。読んだ本と近づいた“自分の痕跡”を残す本棚。Rera はアイヌ語で「風」。"
+    "story": "きれいな読書記録を作るためのアプリじゃない。線を引いた一文や、思わず撮ったページ。読んだ本に“自分の痕跡”を残す本棚を作りたかった。Rera はアイヌ語で「風」。"
    },
    {
     "name": "てのひラボ",
