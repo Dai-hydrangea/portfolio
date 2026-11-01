@@ -100,7 +100,9 @@
   .sheet{position:fixed;left:0;right:0;bottom:0;z-index:40;transform:translateY(102%);
     transition:transform .5s cubic-bezier(.2,.9,.25,1);
     background:linear-gradient(180deg,#f4f8f9,#e7eef0);border-top:1px solid var(--line);
-    box-shadow:0 -24px 60px rgba(20,50,70,.3);border-radius:22px 22px 0 0;max-height:82vh;overflow:auto;}
+    box-shadow:0 -24px 60px rgba(20,50,70,.3);border-radius:22px 22px 0 0;max-height:82vh;overflow:auto;
+    overscroll-behavior:contain;}
+  body.sheet-open{overflow:hidden;}
   .sheet.up{transform:translateY(0);}
   .handle{width:46px;height:5px;border-radius:3px;background:rgba(60,100,120,.3);margin:12px auto 0;}
   .scrim{position:fixed;inset:0;z-index:39;background:rgba(20,40,55,.3);backdrop-filter:blur(2px);
@@ -163,6 +165,7 @@ const TINTS=[
 const pondsEl=document.getElementById('ponds');
 const fishes=[]; // {el, baseX, baseY, phase, amp, rotp}
 let justDragged=false, dragMoved=false;  // ドラッグ直後のクリック誤爆を防ぐ
+let dragDown=false, dragScroller=null, dsx=0, dsl=0;  // grab-to-slide（setPointerCapture不使用）
 
 function laneHeight(){
   return innerWidth<640
@@ -185,22 +188,12 @@ DATA.forEach((g,gi)=>{
   },{passive:true});
   // 矢印タップ＝その行を少し送る
   more.addEventListener('click',()=>scroller.scrollBy({left:Math.min(380,scroller.clientWidth*0.8),behavior:'smooth'}));
-  // マウスで掴んで横に動かす（grab-to-slide）。タッチはネイティブスクロールに任せる
-  let down=false,sx=0,sl=0;
+  // マウスで掴んで横に動かす（grab-to-slide）。捕獲はしない＝クリックを横取りしない
   scroller.addEventListener('pointerdown',e=>{
     if(e.pointerType!=='mouse')return;
-    down=true; dragMoved=false; sx=e.clientX; sl=scroller.scrollLeft;
-    scroller.setPointerCapture(e.pointerId); scroller.classList.add('grabbing');
+    dragDown=true; dragMoved=false; dragScroller=scroller; dsx=e.clientX; dsl=scroller.scrollLeft;
+    scroller.classList.add('grabbing');
   });
-  scroller.addEventListener('pointermove',e=>{
-    if(!down)return;
-    const dx=e.clientX-sx; if(Math.abs(dx)>4)dragMoved=true;
-    scroller.scrollLeft=sl-dx;
-  });
-  const endDrag=()=>{ if(!down)return; down=false; scroller.classList.remove('grabbing');
-    if(dragMoved){ justDragged=true; setTimeout(()=>justDragged=false,60); } };
-  scroller.addEventListener('pointerup',endDrag);
-  scroller.addEventListener('pointercancel',endDrag);
   g.apps.forEach((a,ai)=>{
     const f=document.createElement('div'); f.className='fish';
     f.innerHTML=`<div class="ic"><img loading="lazy" src="${a.icon}" alt="${a.name}"></div>
@@ -211,6 +204,19 @@ DATA.forEach((g,gi)=>{
     fishes.push({el:f,gi,ai,phase:Math.random()*Math.PI*2,amp:3+Math.random()*4,rotp:Math.random()*Math.PI*2,speed:.6+Math.random()*.5});
   });
   pondsEl.appendChild(lane);
+});
+
+// grab-to-slide のドラッグ追従（window で一括。捕獲しないのでクリックは正常に発火）
+window.addEventListener('pointermove',e=>{
+  if(!dragDown||!dragScroller)return;
+  const dx=e.clientX-dsx; if(Math.abs(dx)>4)dragMoved=true;
+  dragScroller.scrollLeft=dsl-dx;
+});
+window.addEventListener('pointerup',()=>{
+  if(!dragDown)return; dragDown=false;
+  if(dragScroller)dragScroller.classList.remove('grabbing');
+  if(dragMoved){ justDragged=true; setTimeout(()=>justDragged=false,60); }
+  dragScroller=null;
 });
 
 function layout(){
@@ -275,10 +281,10 @@ function openSheet(gi,ai){
     </div>
     <p class="story">${a.story}</p>
     <div class="pshots">${(a.shots||[]).map(s=>`<img loading="lazy" src="${s}" alt="">`).join('')}</div>`;
-  sheet.classList.add('up'); scrim.classList.add('on');
+  sheet.classList.add('up'); scrim.classList.add('on'); document.body.classList.add('sheet-open');
 }
 function closeSheet(){
-  sheet.classList.remove('up'); scrim.classList.remove('on');
+  sheet.classList.remove('up'); scrim.classList.remove('on'); document.body.classList.remove('sheet-open');
   if(hookedEl){ hookedEl.hooked=false; hookedEl=null; }
 }
 scrim.onclick=closeSheet;
@@ -293,8 +299,10 @@ sheet.addEventListener('touchstart',e=>{
 sheet.addEventListener('touchmove',e=>{
   if(!shTop)return;                                   // コンテンツ内スクロール中はドラッグしない
   const dy=e.touches[0].clientY-shY;
-  if(dy>0){ shDrag=true; sheet.style.transform=`translateY(${dy}px)`; }
-},{passive:true});
+  if(dy>0){ shDrag=true; sheet.style.transform=`translateY(${dy}px)`; e.preventDefault(); } // 背景へ伝播させない
+},{passive:false});
+// 暗幕の上での指移動は背景を動かさない
+scrim.addEventListener('touchmove',e=>e.preventDefault(),{passive:false});
 sheet.addEventListener('touchend',e=>{
   sheet.style.transition='';
   const dy=e.changedTouches[0].clientY-shY;
