@@ -70,13 +70,13 @@
   .lane.scrollable .edge{opacity:1;}
   .lane.ended .edge{opacity:0;}
   /* 続きを示す矢印（タップでその行を少し送る）*/
-  .lane .more{position:absolute;right:12px;top:50%;z-index:6;width:38px;height:38px;border-radius:50%;
-    background:rgba(255,255,255,.82);color:#2f6f8f;font-size:20px;font-weight:700;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(20,50,70,.28);
+  .lane .more{position:absolute;right:12px;bottom:12px;z-index:6;width:26px;height:26px;border-radius:50%;
+    background:rgba(255,255,255,.86);color:#2f6f8f;font-size:14px;font-weight:700;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(20,50,70,.25);
     opacity:0;pointer-events:none;transition:opacity .3s;animation:nudge 1.4s ease-in-out infinite;}
   .lane.scrollable .more{opacity:1;pointer-events:auto;}
   .lane.ended .more{opacity:0;pointer-events:none;}
-  @keyframes nudge{0%,100%{transform:translate(0,-50%);}50%{transform:translate(5px,-50%);}}
+  @keyframes nudge{0%,100%{transform:translateX(0);}50%{transform:translateX(4px);}}
 
   .fish{position:absolute;z-index:2;cursor:pointer;will-change:transform;
     display:flex;flex-direction:column;align-items:center;}
