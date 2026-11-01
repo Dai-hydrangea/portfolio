@@ -60,14 +60,23 @@
   .lane .en{display:block;font-size:9px;color:var(--dim);letter-spacing:.2em;text-transform:uppercase;font-family:ui-monospace,Menlo,monospace;margin-top:2px;}
   /* アイコンだけ横スクロールする層（水面とラベルは固定） */
   .scroller{position:absolute;inset:0;z-index:2;overflow-x:auto;overflow-y:hidden;
-    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab;}
+  .scroller.grabbing{cursor:grabbing;}
   .scroller::-webkit-scrollbar{display:none;}
   .track{position:relative;height:100%;}
-  /* 右端に「まだ続くよ」のうっすらフェード（スクロール可能なレーンだけ） */
-  .lane .edge{position:absolute;top:0;right:0;bottom:0;width:34px;z-index:4;pointer-events:none;
-    background:linear-gradient(90deg,transparent,rgba(20,50,70,.14));opacity:0;transition:opacity .3s;}
+  /* 右端に「まだ続くよ」のフェード（スクロール可能なレーンだけ） */
+  .lane .edge{position:absolute;top:0;right:0;bottom:0;width:56px;z-index:4;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(20,50,70,.16));opacity:0;transition:opacity .3s;}
   .lane.scrollable .edge{opacity:1;}
   .lane.ended .edge{opacity:0;}
+  /* 続きを示す矢印（タップでその行を少し送る）*/
+  .lane .more{position:absolute;right:12px;top:50%;z-index:6;width:38px;height:38px;border-radius:50%;
+    background:rgba(255,255,255,.82);color:#2f6f8f;font-size:20px;font-weight:700;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(20,50,70,.28);
+    opacity:0;pointer-events:none;transition:opacity .3s;animation:nudge 1.4s ease-in-out infinite;}
+  .lane.scrollable .more{opacity:1;pointer-events:auto;}
+  .lane.ended .more{opacity:0;pointer-events:none;}
+  @keyframes nudge{0%,100%{transform:translate(0,-50%);}50%{transform:translate(5px,-50%);}}
 
   .fish{position:absolute;z-index:2;cursor:pointer;will-change:transform;
     display:flex;flex-direction:column;align-items:center;}
@@ -152,6 +161,7 @@ const TINTS=[
 ];
 const pondsEl=document.getElementById('ponds');
 const fishes=[]; // {el, baseX, baseY, phase, amp, rotp}
+let justDragged=false, dragMoved=false;  // ドラッグ直後のクリック誤爆を防ぐ
 
 function laneHeight(){ return Math.max(206, Math.min(280, innerHeight*0.34)); }
 
@@ -160,19 +170,38 @@ DATA.forEach((g,gi)=>{
   const lane=document.createElement('div');
   lane.className='lane'; lane.style.height=laneHeight()+'px';
   lane.style.setProperty('--tint',t.band); lane.style.setProperty('--tint-ink',t.ink);
-  lane.innerHTML=`<div class="water"></div><div class="llabel"><span class="verb">${g.verb}</span><span class="en">${g.en}</span></div><div class="scroller"><div class="track"></div></div><div class="edge"></div>`;
+  lane.innerHTML=`<div class="water"></div><div class="llabel"><span class="verb">${g.verb}</span><span class="en">${g.en}</span></div><div class="scroller"><div class="track"></div></div><div class="edge"></div><div class="more">→</div>`;
   const track=lane.querySelector('.track');
   const scroller=lane.querySelector('.scroller');
+  const more=lane.querySelector('.more');
   scroller.addEventListener('scroll',()=>{
     const atEnd=scroller.scrollLeft+scroller.clientWidth>=scroller.scrollWidth-6;
     lane.classList.toggle('ended',atEnd);
   },{passive:true});
+  // 矢印タップ＝その行を少し送る
+  more.addEventListener('click',()=>scroller.scrollBy({left:Math.min(380,scroller.clientWidth*0.8),behavior:'smooth'}));
+  // マウスで掴んで横に動かす（grab-to-slide）。タッチはネイティブスクロールに任せる
+  let down=false,sx=0,sl=0;
+  scroller.addEventListener('pointerdown',e=>{
+    if(e.pointerType!=='mouse')return;
+    down=true; dragMoved=false; sx=e.clientX; sl=scroller.scrollLeft;
+    scroller.setPointerCapture(e.pointerId); scroller.classList.add('grabbing');
+  });
+  scroller.addEventListener('pointermove',e=>{
+    if(!down)return;
+    const dx=e.clientX-sx; if(Math.abs(dx)>4)dragMoved=true;
+    scroller.scrollLeft=sl-dx;
+  });
+  const endDrag=()=>{ if(!down)return; down=false; scroller.classList.remove('grabbing');
+    if(dragMoved){ justDragged=true; setTimeout(()=>justDragged=false,60); } };
+  scroller.addEventListener('pointerup',endDrag);
+  scroller.addEventListener('pointercancel',endDrag);
   g.apps.forEach((a,ai)=>{
     const f=document.createElement('div'); f.className='fish';
     f.innerHTML=`<div class="ic"><img loading="lazy" src="${a.icon}" alt="${a.name}"></div>
       <div class="nm">${a.name}</div>
       <div class="reflect"><img src="${a.icon}" alt=""></div>`;
-    f.onclick=()=>openSheet(gi,ai);
+    f.onclick=()=>{ if(justDragged)return; openSheet(gi,ai); };
     track.appendChild(f);
     fishes.push({el:f,gi,ai,phase:Math.random()*Math.PI*2,amp:3+Math.random()*4,rotp:Math.random()*Math.PI*2,speed:.6+Math.random()*.5});
   });
