@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>D.Seto — つくったもの棚（池）</title>
+<style>
+  :root{--paper:#eef3f4;--ink:#1f2b33;--dim:#6f8591;--indigo:#2f6f8f;--line:rgba(60,100,120,.2);}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  body{background:var(--paper);color:var(--ink);overflow-x:hidden;
+    font-family:"Hiragino Mincho ProN","Hiragino Sans","Noto Serif JP",serif;-webkit-font-smoothing:antialiased;}
+
+  header{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;
+    padding:18px 32px;background:linear-gradient(180deg,rgba(238,243,244,.95),rgba(238,243,244,.6));
+    backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  .name{font-size:18px;letter-spacing:.14em;font-weight:700;}
+  .name small{color:var(--dim);font-weight:400;font-size:11px;letter-spacing:.06em;margin-left:10px;font-family:ui-monospace,Menlo,monospace;}
+  .links{display:flex;gap:8px;font-family:ui-monospace,Menlo,monospace;font-size:11px;}
+  .links a{text-decoration:none;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:6px 13px;letter-spacing:.08em;transition:all .2s;}
+  .links a:hover{color:#fff;background:var(--indigo);border-color:var(--indigo);}
+
+  /* 池（ジャンル=水のレーン） */
+  .lane{position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.4);}
+  .lane .water{position:absolute;inset:0;z-index:0;
+    background:linear-gradient(180deg, rgba(var(--tint),.10), rgba(var(--tint),.26));}
+  .lane .water::before{content:"";position:absolute;left:-10%;right:-10%;top:0;height:14px;
+    background:repeating-linear-gradient(90deg, rgba(255,255,255,.5) 0 18px, rgba(255,255,255,.1) 18px 36px);
+    filter:blur(3px);opacity:.5;animation:surf 7s linear infinite;}
+  @keyframes surf{from{transform:translateX(0)}to{transform:translateX(-36px)}}
+  .lane .llabel{position:absolute;left:26px;top:14px;z-index:3;pointer-events:none;}
+  .lane .verb{font-size:17px;font-weight:700;color:rgb(var(--tint-ink));letter-spacing:.04em;}
+  .lane .en{display:block;font-size:9px;color:var(--dim);letter-spacing:.2em;text-transform:uppercase;font-family:ui-monospace,Menlo,monospace;margin-top:2px;}
+
+  .fish{position:absolute;z-index:2;cursor:pointer;will-change:transform;
+    display:flex;flex-direction:column;align-items:center;}
+  .fish .ic{width:64px;height:64px;border-radius:22%;overflow:hidden;background:#fff;
+    box-shadow:0 8px 16px rgba(20,50,70,.28),0 0 0 1px rgba(255,255,255,.5);
+    transition:box-shadow .3s,transform .3s;}
+  .fish .ic img{width:100%;height:100%;object-fit:cover;display:block;}
+  .fish .nm{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:6px;
+    width:86px;text-align:center;line-height:1.25;font-size:10px;color:var(--ink);opacity:.82;
+    white-space:normal;word-break:break-word;pointer-events:none;transition:opacity .25s;z-index:5;}
+  .fish:hover{z-index:9;}
+  .fish:hover .nm{opacity:1;font-weight:700;}
+  .fish:hover .ic{box-shadow:0 14px 26px rgba(20,50,70,.4),0 0 0 2px rgba(255,255,255,.9);transform:scale(1.06);}
+  /* 反射 */
+  .fish .reflect{width:64px;height:40px;margin-top:4px;border-radius:22%;overflow:hidden;opacity:.14;
+    transform:scaleY(-1);filter:blur(1px);}
+  .fish .reflect img{width:64px;height:64px;object-fit:cover;}
+
+  /* 吊り上げシート */
+  .sheet{position:fixed;left:0;right:0;bottom:0;z-index:40;transform:translateY(102%);
+    transition:transform .5s cubic-bezier(.2,.9,.25,1);
+    background:linear-gradient(180deg,#f4f8f9,#e7eef0);border-top:1px solid var(--line);
+    box-shadow:0 -24px 60px rgba(20,50,70,.3);border-radius:22px 22px 0 0;max-height:82vh;overflow:auto;}
+  .sheet.up{transform:translateY(0);}
+  .handle{width:46px;height:5px;border-radius:3px;background:rgba(60,100,120,.3);margin:12px auto 0;}
+  .scrim{position:fixed;inset:0;z-index:39;background:rgba(20,40,55,.3);backdrop-filter:blur(2px);
+    opacity:0;pointer-events:none;transition:opacity .4s;}
+  .scrim.on{opacity:1;pointer-events:auto;}
+  .scontent{padding:14px 34px 40px;}
+  .stop{display:flex;gap:20px;align-items:center;margin:8px 0 16px;}
+  .stop .ic{width:92px;height:92px;border-radius:22%;overflow:hidden;background:#fff;flex:0 0 auto;
+    box-shadow:0 10px 24px rgba(20,50,70,.3);}
+  .stop .ic img{width:100%;height:100%;object-fit:cover;}
+  .stop .en{font-size:10px;color:var(--indigo);letter-spacing:.18em;text-transform:uppercase;font-family:ui-monospace,Menlo,monospace;}
+  .stop h1{font-size:24px;font-weight:800;margin:5px 0 10px;}
+  .stop .meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  .chip{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#4a6370;background:rgba(255,255,255,.55);
+    font-family:ui-monospace,Menlo,monospace;font-size:10px;}
+  a.store{text-decoration:none;color:#fff;background:linear-gradient(135deg,#3a86a0,#2f6f8f);
+    padding:8px 15px;border-radius:999px;font-size:11.5px;font-weight:700;box-shadow:0 6px 16px rgba(47,111,143,.3);}
+  .story{font-size:15px;line-height:2;color:#33434d;margin:2px 0 20px;text-wrap:pretty;}
+  .pshots{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;}
+  .pshots img{height:340px;border-radius:14px;border:1px solid var(--line);box-shadow:0 8px 22px rgba(20,50,70,.18);background:#fff;flex:0 0 auto;}
+  @media(max-width:640px){.stop{flex-direction:column;text-align:center;align-items:center}.pshots img{height:250px}}
+  .hint{text-align:center;color:var(--dim);font-size:11px;letter-spacing:.1em;padding:14px;font-family:ui-monospace,Menlo,monospace;}
+</style>
+</head>
+<body>
+  <header>
+    <div class="name">D.Seto <small>つくったもの棚</small></div>
+    <div class="links">
+      <a href="https://note.com/daisaku_seto" target="_blank" rel="noopener">note</a>
+      <a href="https://apps.apple.com/jp/developer/daisaku-seto/id1889853807" target="_blank" rel="noopener">App Store</a>
+    </div>
+  </header>
+
+  <div id="ponds"></div>
+  <div class="hint">アイコンをタップすると、下から詳細がせり上がります</div>
+
+  <div class="scrim" id="scrim"></div>
+  <div class="sheet" id="sheet"><div class="handle"></div><div class="scontent" id="scontent"></div></div>
+
+<script src="data.js"></script>
+<script>
+const DATA=window.DATA||[];
+const TINTS=[
+  {band:"232,169,61",ink:"150,95,10"},{band:"216,92,67",ink:"165,55,38"},
+  {band:"90,165,138",ink:"40,110,86"},{band:"63,124,176",ink:"38,86,135"},
+  {band:"155,124,192",ink:"110,78,150"},{band:"169,139,83",ink:"120,92,42"},
+];
+const pondsEl=document.getElementById('ponds');
+const fishes=[]; // {el, baseX, baseY, phase, amp, rotp}
+
+function laneHeight(){ return Math.max(150, Math.min(210, innerHeight*0.26)); }
+
+DATA.forEach((g,gi)=>{
+  const t=TINTS[gi%TINTS.length];
+  const lane=document.createElement('div');
+  lane.className='lane'; lane.style.height=laneHeight()+'px';
+  lane.style.setProperty('--tint',t.band); lane.style.setProperty('--tint-ink',t.ink);
+  lane.innerHTML=`<div class="water"></div><div class="llabel"><span class="verb">${g.verb}</span><span class="en">${g.en}</span></div>`;
+  g.apps.forEach((a,ai)=>{
+    const f=document.createElement('div'); f.className='fish';
+    f.innerHTML=`<div class="ic"><img loading="lazy" src="${a.icon}" alt="${a.name}"></div>
+      <div class="nm">${a.name}</div>
+      <div class="reflect"><img src="${a.icon}" alt=""></div>`;
+    f.onclick=()=>openSheet(gi,ai);
+    lane.appendChild(f);
+    fishes.push({el:f,gi,ai,phase:Math.random()*Math.PI*2,amp:3+Math.random()*4,rotp:Math.random()*Math.PI*2,speed:.6+Math.random()*.5});
+  });
+  pondsEl.appendChild(lane);
+});
+
+function layout(){
+  const lanes=[...document.querySelectorAll('.lane')];
+  lanes.forEach(l=>l.style.height=laneHeight()+'px');
+  DATA.forEach((g,gi)=>{
+    const lane=lanes[gi]; const W=lane.clientWidth, H=lane.clientHeight;
+    const items=g.apps.map((a,ai)=>fishes.find(f=>f.gi===gi&&f.ai===ai));
+    // 各ジャンル＝横1行。左から等間隔に並べる（重ならない間隔）
+    const padL=146, icon=64, gap=30;
+    let stepX=icon+gap;                           // 最小間隔
+    const avail=W-padL-30;
+    if(items.length>1) stepX=Math.max(icon+gap, Math.min(stepX+40, avail/(items.length-1+0.001)));
+    items.forEach((f,ai)=>{
+      f.baseX=padL+ai*stepX;
+      f.baseY=H*0.48;                             // 全部おなじ高さ＝1行（上のタイトル用に少し下げる）
+    });
+  });
+}
+
+let t0=null;
+function tick(ts){
+  if(t0===null)t0=ts; const t=(ts-t0)/1000;
+  for(const f of fishes){
+    if(f.hooked) continue;
+    const y=f.baseY + Math.sin(t*f.speed + f.phase)*f.amp;
+    const rot=Math.sin(t*f.speed*0.8 + f.rotp)*4;
+    f.el.style.transform=`translate(${f.baseX}px, ${y}px) rotate(${rot}deg)`;
+  }
+  requestAnimationFrame(tick);
+}
+
+const sheet=document.getElementById('sheet'), scrim=document.getElementById('scrim'), scontent=document.getElementById('scontent');
+let hookedEl=null;
+function openSheet(gi,ai){
+  const g=DATA[gi], a=g.apps[ai];
+  // 吊り上げ演出
+  if(hookedEl)hookedEl.hooked=false;
+  const f=fishes.find(x=>x.gi===gi&&x.ai===ai);
+  f.hooked=true; hookedEl=f;
+  f.el.style.transition='transform .5s cubic-bezier(.2,.9,.25,1)';
+  f.el.style.transform=`translate(${f.baseX}px, ${-20}px) scale(1.25)`;
+  setTimeout(()=>{ if(f.el)f.el.style.transition=''; },520);
+
+  scontent.innerHTML=`
+    <div class="stop">
+      <div class="ic"><img src="${a.icon}" alt=""></div>
+      <div>
+        <div class="en">${g.verb} · ${g.en}</div>
+        <h1>${a.name}</h1>
+        <div class="meta">
+          <span class="chip">${a.genreName||''}</span>
+          <span class="chip">${a.price||''}</span>
+          <a class="store" href="${a.url}" target="_blank" rel="noopener">App Store で見る ↗</a>
+        </div>
+      </div>
+    </div>
+    <p class="story">${a.story}</p>
+    <div class="pshots">${(a.shots||[]).map(s=>`<img loading="lazy" src="${s}" alt="">`).join('')}</div>`;
+  sheet.classList.add('up'); scrim.classList.add('on');
+}
+function closeSheet(){
+  sheet.classList.remove('up'); scrim.classList.remove('on');
+  if(hookedEl){ hookedEl.hooked=false; hookedEl=null; }
+}
+scrim.onclick=closeSheet;
+addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet();});
+addEventListener('resize',layout);
+
+layout(); requestAnimationFrame(tick);
+</script>
+</body>
+</html>
