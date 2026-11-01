@@ -33,6 +33,20 @@
   .links a{text-decoration:none;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:6px 13px;letter-spacing:.08em;transition:all .2s;}
   .links a:hover{color:#fff;background:var(--indigo);border-color:var(--indigo);}
 
+  /* トップのごあいさつ */
+  .hero{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:48px 28px 30px;text-align:center;}
+  .hero h2{font-size:25px;font-weight:800;letter-spacing:.04em;margin-bottom:16px;}
+  .hero p{font-size:15px;line-height:2.05;color:#33434d;margin:0 auto 26px;max-width:660px;text-wrap:pretty;}
+  .herolinks{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .herolinks a{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-weight:700;
+    font-size:13.5px;letter-spacing:.04em;padding:12px 22px;border-radius:999px;transition:all .2s;
+    border:1.5px solid var(--indigo);color:var(--indigo);background:rgba(255,255,255,.5);}
+  .herolinks a:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(47,111,143,.22);}
+  .herolinks a.primary{color:#fff;background:linear-gradient(135deg,#3a86a0,#2f6f8f);border-color:transparent;
+    box-shadow:0 6px 16px rgba(47,111,143,.3);}
+  .herodiv{max-width:120px;margin:34px auto 6px;border:none;border-top:1px solid var(--line);}
+  @media(max-width:640px){.hero{padding:30px 20px 18px;} .hero h2{font-size:21px;} .hero p{font-size:14px;line-height:1.95;}}
+
   /* 池（ジャンル=水のレーン） */
   .lane{position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.4);}
   .lane .water{position:absolute;inset:0;z-index:0;
@@ -100,6 +114,17 @@
       <a href="https://apps.apple.com/jp/developer/daisaku-seto/id1889853807" target="_blank" rel="noopener">App Store</a>
     </div>
   </header>
+
+  <section class="hero">
+    <h2>これまで作ったもの</h2>
+    <p>音楽の練習道具、小さなゲーム、AIとの対話、暮らしの道具。ジャンルはばらばらですが、どれも「自分や身近な人がほしかったもの」を手で作ってきました。気になったアイコンをつつくと、作った時の気持ちとスクリーンショットが出ます。よかったら、のぞいてみてください。</p>
+    <div class="herolinks">
+      <a class="primary" href="https://apps.apple.com/jp/developer/daisaku-seto/id1889853807" target="_blank" rel="noopener">App Store で見る ↗</a>
+      <a href="https://note.com/dai_hydrangea" target="_blank" rel="noopener">note を読む ↗</a>
+      <a href="https://twitter.com/Dai_hydrangea" target="_blank" rel="noopener">X をフォロー ↗</a>
+    </div>
+    <hr class="herodiv">
+  </section>
 
   <div id="ponds"></div>
   <div class="hint">アイコンをタップすると、下から詳細がせり上がります</div>
