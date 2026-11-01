@@ -61,20 +61,20 @@
 
   .fish{position:absolute;z-index:2;cursor:pointer;will-change:transform;
     display:flex;flex-direction:column;align-items:center;}
-  .fish .ic{width:64px;height:64px;border-radius:22%;overflow:hidden;background:#fff;
+  .fish .ic{width:110px;height:110px;border-radius:22%;overflow:hidden;background:#fff;
     box-shadow:0 8px 16px rgba(20,50,70,.28),0 0 0 1px rgba(255,255,255,.5);
     transition:box-shadow .3s,transform .3s;}
   .fish .ic img{width:100%;height:100%;object-fit:cover;display:block;}
-  .fish .nm{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:6px;
-    width:86px;text-align:center;line-height:1.25;font-size:10px;color:var(--ink);opacity:.82;
+  .fish .nm{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:8px;
+    width:124px;text-align:center;line-height:1.25;font-size:11.5px;color:var(--ink);opacity:.82;
     white-space:normal;word-break:break-word;pointer-events:none;transition:opacity .25s;z-index:5;}
   .fish:hover{z-index:9;}
   .fish:hover .nm{opacity:1;font-weight:700;}
   .fish:hover .ic{box-shadow:0 14px 26px rgba(20,50,70,.4),0 0 0 2px rgba(255,255,255,.9);transform:scale(1.06);}
   /* 反射 */
-  .fish .reflect{width:64px;height:40px;margin-top:4px;border-radius:22%;overflow:hidden;opacity:.14;
+  .fish .reflect{width:110px;height:64px;margin-top:6px;border-radius:22%;overflow:hidden;opacity:.14;
     transform:scaleY(-1);filter:blur(1px);}
-  .fish .reflect img{width:64px;height:64px;object-fit:cover;}
+  .fish .reflect img{width:110px;height:110px;object-fit:cover;}
 
   /* 吊り上げシート */
   .sheet{position:fixed;left:0;right:0;bottom:0;z-index:40;transform:translateY(102%);
@@ -143,7 +143,7 @@ const TINTS=[
 const pondsEl=document.getElementById('ponds');
 const fishes=[]; // {el, baseX, baseY, phase, amp, rotp}
 
-function laneHeight(){ return Math.max(150, Math.min(210, innerHeight*0.26)); }
+function laneHeight(){ return Math.max(206, Math.min(280, innerHeight*0.34)); }
 
 DATA.forEach((g,gi)=>{
   const t=TINTS[gi%TINTS.length];
@@ -170,7 +170,7 @@ function layout(){
     const lane=lanes[gi]; const W=lane.clientWidth, H=lane.clientHeight;
     const items=g.apps.map((a,ai)=>fishes.find(f=>f.gi===gi&&f.ai===ai));
     // 各ジャンル＝横1行。左から等間隔に並べる（重ならない間隔）
-    const padL=146, icon=64, gap=30;
+    const padL=146, icon=110, gap=32;
     let stepX=icon+gap;                           // 最小間隔
     const avail=W-padL-30;
     if(items.length>1) stepX=Math.max(icon+gap, Math.min(stepX+40, avail/(items.length-1+0.001)));
